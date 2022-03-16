@@ -22,6 +22,6 @@ def splitData(datalines,map_output):
 
 if __name__ == "__main__":
     filename = "data.txt"
-    map_output = "map_output"
+    map_output = "map_output_1"
     datalines = getData(filename)
     splitData(datalines,map_output)
