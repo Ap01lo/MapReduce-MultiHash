@@ -6,16 +6,13 @@ sys.stdout=io.TextIOWrapper(sys.stdout.buffer,encoding='utf8')
 # 获取数据
 from fileinput import filename
 
-
 def getData(filename):
-    print(f"Step 1:Reading Files from: {filename}...")
     with open(filename,'r',encoding='UTF-8') as f:
         lines = f.readlines()
-        print("Step 1:Done")
     return lines
 
 
-def generatePairs(lines):
+def generatePairs(lines,pairfile):
     item_list = []
     pair_list = []
     for line in lines:
@@ -26,12 +23,15 @@ def generatePairs(lines):
         for j in range(len(item_list)-1-i):
             pair_list.append((item_list[i],item_list[i+j+1])) 
     # 存储到文档里面
-    with open("Pairs_1","w",encoding="UTF-8") as f:
+    # 第一列是整数序号，用来hash
+    # 第二第三列是项对
+    with open(pairfile,"w",encoding="UTF-8") as f:
         for i,item in enumerate(pair_list):
             f.write(str(i)+"\t"+item[0]+"\t"+item[1]+"\n")
-    
-    return item_list
+    return pair_list
+
 if __name__ == "__main__":
     filename = "reduce_output_1"
+    pairfile = "Pairs_0"
     datalines = getData(filename)
-    generatePairs(datalines) 
+    generatePairs(datalines,pairfile) 
