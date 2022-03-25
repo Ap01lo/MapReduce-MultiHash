@@ -3,6 +3,7 @@ import Reduce_1
 import Mix
 import Hash
 import Judge
+import Count
 
 def main():
     item_pf,bitmap_1,bitmap_2,bucket_1,bucket_2 = Scan_1()
@@ -34,13 +35,11 @@ def Scan_2(item_pf,bitmap_1,bitmap_2,bucket_1,bucket_2):
 
     # judge if in pf_hash for each pair
     item_list = Judge.getNum(pairs_pre_list,"Pairs_0")
-    print(item_list)
     pairs_list = Judge.judge(item_list,bitmap_1,bitmap_2,bucket_1,bucket_2)
-    print(pairs_list)
-    
 
     # count pair_pf
-
+    pair_pf = Count.Count(pairs_list,"Pairs_0","data_0","reduce_output_0")
+    print(pair_pf)
 if __name__ == "__main__":
     main()
 
