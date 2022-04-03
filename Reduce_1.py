@@ -1,5 +1,5 @@
 # 频繁项置信度
-ITEM_SUPPORT = 115
+# ITEM_SUPPORT = 6000
 
 # 从map_output读取文件
 def getMapData(map_output):
@@ -8,7 +8,7 @@ def getMapData(map_output):
     return lines
 
 # 整合条目
-def reduce(lines,reduce_output,item_pf_output):
+def reduce(lines,reduce_output,item_pf_output,ITEM_SUPPORT):
     item_list = []
     item_count = []
     item_pf = []
@@ -29,6 +29,7 @@ def reduce(lines,reduce_output,item_pf_output):
     with open(item_pf_output,"w") as f:
         for item in item_pf:
             f.write(str(item)+"\n")
+    print(f"The Threshold of 1 pf is {ITEM_SUPPORT} of {len(item_pf)}")
     return item_pf
                 
                 

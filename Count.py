@@ -3,12 +3,12 @@ import io
 import sys
 
 # 二元频繁项阈值
-THRESHOLD = 45
+# THRESHOLD = 2050
 
 from cv2 import line, split
 sys.stdout=io.TextIOWrapper(sys.stdout.buffer,encoding='utf8')
    
-def Count(pairs_list,pair_0,data_0,reduce_output_0):
+def Count(pairs_list,pair_0,data_0,reduce_output_0,THRESHOLD):
     # item_list 存储物品种类，从reduce_output_0读取
     item_list = [] # 物品种类
     with open(reduce_output_0,"r",encoding="UTF-8") as f:
@@ -35,7 +35,8 @@ def Count(pairs_list,pair_0,data_0,reduce_output_0):
             if item_list[pair[0]] in item.split() and item_list[pair[1]] in item.split():
                 count_list[t] += 1
     
-    
+    print(count_list) 
+    print(f"The Threshold of 2 items is {THRESHOLD} of {len(count_list)}")
     # 得到了伪频繁项对的计数，根据阈值筛选二元频繁项
     pair_pf = []
     for c,i in enumerate(count_list):

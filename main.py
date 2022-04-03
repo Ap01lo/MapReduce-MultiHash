@@ -5,6 +5,8 @@ import Hash
 import Judge
 import Count
 
+import os
+
 def main():
     item_pf,bitmap_1,bitmap_2,bucket_1,bucket_2 = Scan_1()
     Scan_2(item_pf,bitmap_1,bitmap_2,bucket_1,bucket_2)
@@ -14,7 +16,7 @@ def Scan_1():
     Map_1.MapData(Map_1.getData("data_0"),"map_output_0")
 
     # Reduce
-    item_pf = Reduce_1.reduce(Reduce_1.getMapData("map_output_0"),"reduce_output_0","item_pf_output_0")
+    item_pf = Reduce_1.reduce(Reduce_1.getMapData("map_output_0"),"reduce_output_0","item_pf_output_0",60)
 
     # pairs2num
     Mix.generatePairs(Mix.getData("reduce_output_0"),"Pairs_0")
@@ -38,8 +40,15 @@ def Scan_2(item_pf,bitmap_1,bitmap_2,bucket_1,bucket_2):
     pairs_list = Judge.judge(item_list,bitmap_1,bitmap_2,bucket_1,bucket_2)
 
     # count pair_pf
-    pair_pf = Count.Count(pairs_list,"Pairs_0","data_0","reduce_output_0")
+    pair_pf = Count.Count(pairs_list,"Pairs_0","data_0","reduce_output_0",20)
     print(pair_pf)
+
 if __name__ == "__main__":
     main()
 
+    # delete temp file
+    os.remove("item_pf_output_0")
+    os.remove("map_output_0")
+    os.remove("Pairs_0")
+    os.remove("Pairs_1")
+    os.remove("reduce_output_0")
